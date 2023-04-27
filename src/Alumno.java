@@ -50,5 +50,23 @@ public class Alumno {
     public void setMateriaCursadas(List<Materia> materiaCursadas) {
         this.materiaCursadas = materiaCursadas;
     }
+
+    // Metodos
+    public void asignarMaterias(Alumno alumno, List<Materia> materias, List<Alumno> alumnos) {
+
+        Random random = new Random();
+
+        for (Alumno alumnoo : alumnos) {
+            for (Materia materia : materias) {
+                materia.setNotaFinal(random.nextInt(10) + 1);
+                if (materia.getNotaFinal() >= 7) {
+                    materia.setEstado(Estado.APROBADA);
+                } else {
+                    materia.setEstado(Estado.CURSADA);
+                }
+                alumnoo.getMateriaCursadas().add(materia);
+            }
+        }
+    }
 }
 
