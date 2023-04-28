@@ -32,6 +32,8 @@ public class Punto10 {
                     System.out.println("--> " + materia.getNombre() + " - " + materia.getProfesor());
                 }
             }
+
+            System.out.println("////////////////////////////////////////////////////");
         }
     }
 }

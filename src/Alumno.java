@@ -52,21 +52,26 @@ public class Alumno {
     }
 
     // Metodos
-    public void asignarMaterias(Alumno alumno, List<Materia> materias, List<Alumno> alumnos) {
-
+    public void asignarMaterias(List<Materia> materias) {
         Random random = new Random();
+        List<Materia> materiasAsignadas = new ArrayList<>();
 
-        for (Alumno alumnoo : alumnos) {
-            for (Materia materia : materias) {
-                materia.setNotaFinal(random.nextInt(10) + 1);
-                if (materia.getNotaFinal() >= 7) {
-                    materia.setEstado(Estado.APROBADA);
-                } else {
-                    materia.setEstado(Estado.CURSADA);
-                }
-                alumnoo.getMateriaCursadas().add(materia);
+        while (materiasAsignadas.size() <= 4) {
+            Materia materiaAleatoria = materias.get(random.nextInt(materias.size()));
+            if (!materiasAsignadas.contains(materiaAleatoria)) {
+                materiasAsignadas.add(materiaAleatoria);
             }
         }
+
+        for (Materia materia : materiasAsignadas) {
+            Estado estadoAleatorio = Estado.values()[random.nextInt(Estado.values().length)];
+            materia.setEstado(estadoAleatorio);
+            if (estadoAleatorio == Estado.APROBADA) {
+                int notaFinal = 7 + random.nextInt(4);
+                materia.setNotaFinal(notaFinal);
+            }
+        }
+        this.setMateriaCursadas(materiasAsignadas);
     }
 }
 
